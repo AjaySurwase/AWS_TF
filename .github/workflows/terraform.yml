@@ -43,9 +43,11 @@ jobs:
 
       - name: Initialize Terraform
         run: terraform init
+        working-directory: ./Day-01
 
       - name: Validate Terraform
         run: terraform validate
+        working-directory: ./Day-01
 
       - name: Plan Terraform Changes
         run: terraform plan -input=false
