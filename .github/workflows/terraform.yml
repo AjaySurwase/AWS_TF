@@ -2,10 +2,10 @@ name: Terraform Deploy
 
 on:
   push:
-    branches: ["main"]
+    branches:
+      - main
   workflow_dispatch:
 
-# Required for GitHub OIDC authentication
 permissions:
   id-token: write
   contents: read
@@ -20,6 +20,17 @@ jobs:
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
+
+      - name: Debug GitHub OIDC Subject
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const token = await core.getIDToken('sts.amazonaws.com');
+            const payload = JSON.parse(
+              Buffer.from(token.split('.')[1], 'base64url').toString()
+            );
+            console.log('OIDC subject:', payload.sub);
+            console.log('OIDC audience:', payload.aud);
 
       - name: Configure AWS Credentials via OIDC
         uses: aws-actions/configure-aws-credentials@v6
@@ -38,6 +49,3 @@ jobs:
 
       - name: Plan Terraform Changes
         run: terraform plan -input=false
-
-      - name: Apply Terraform Changes
-        run: terraform apply -auto-approve -input=false
