@@ -4,6 +4,7 @@ resource "aws_instance" "myfirstinstance" {
   key_name      = "Terra-key"
   subnet_id     = "subnet-03f8297fae3bcb53c"
   tags = {
-    env = var.enviornment
+    env  = var.enviornment
+    name = ec2
   }
 }
