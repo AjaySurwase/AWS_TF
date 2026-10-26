@@ -49,3 +49,4 @@ jobs:
 
       - name: Plan Terraform Changes
         run: terraform plan -input=false
+        working-directory: ./Day-01
