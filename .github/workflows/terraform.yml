@@ -19,7 +19,7 @@ jobs:
 
       # This action trades the GitHub token for temporary AWS credentials using your IAM Role
       - name: Configure AWS Credentials via OIDC
-        uses: aws-actions/configure-aws-credentials@v4
+        uses: aws-actions/configure-aws-credentials@v6
         with:
           role-to-assume: ${{ vars.AWS_ROLE_ARN }}
           aws-region: us-east-2 # Match your S3 bucket and resource region
