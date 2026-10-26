@@ -3,6 +3,7 @@ name: "Terraform Deploy"
 on:
   push:
     branches: ["main"]
+  workflow_dispatch:
 
 # REQUIRED: Allows GitHub to generate the OIDC token
 permissions:
